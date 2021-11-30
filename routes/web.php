@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,11 @@ Route::get('/command-make-user', function () {
         'name' => 'ndk',
         '--email' => 'ndk2@gmail.com'
     ]);
+});
+
+Route::get('/caching', function () {
+    $value = Cache::remember('users', 600, function () {
+        return DB::table('users')->get();
+    });
+    dd($value);
 });
