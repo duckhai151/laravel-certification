@@ -4,6 +4,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\InvokeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +51,8 @@ Route::get('/collections', function () {
 
     //Method
 });
+
+//Controller
+Route::get('/index', [TestController::class, 'index']);
+Route::get('/invoke', InvokeController::class);
+Route::resource('test-resource', \App\Http\Controllers\TestResourceController::class);
