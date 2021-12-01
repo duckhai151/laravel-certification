@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -31,4 +32,20 @@ Route::get('/caching', function () {
         return DB::table('users')->get();
     });
     dd($value);
+});
+
+Route::get('/collections', function () {
+    //Create collection
+    $collectionExam = collect([1, 2, 3, 4]);
+
+    //Macro
+    Collection::macro('toUpperWithArg', function ($arg) {
+        return $this->map(function ($value) use ($arg) {
+            return Str::upper($value . $arg);
+        });
+    });
+    $collection = collect(['first', 'second']);
+    $upper = $collection->toUpperWithArg('Arg');
+
+    //Method
 });
