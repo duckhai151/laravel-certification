@@ -56,3 +56,8 @@ Route::get('/collections', function () {
 Route::get('/index', [TestController::class, 'index']);
 Route::get('/invoke', InvokeController::class);
 Route::resource('test-resource', \App\Http\Controllers\TestResourceController::class);
+
+Route::get('/eloquent', function () {
+    $users = \App\Models\User::toSql();
+    dd($users);
+});
